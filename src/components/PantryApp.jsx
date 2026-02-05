@@ -25,8 +25,11 @@ export default function PantryApp() {
 
     // Load products from localStorage on mount
     useEffect(() => {
-        if (currentUser) {
-            const storageKey = `pantry_products_${currentUser.uid}`;
+        const isDeveloperMode = localStorage.getItem('developer_mode') === 'true';
+        const uid = isDeveloperMode ? localStorage.getItem('developer_user_uid') : currentUser?.uid;
+
+        if (uid) {
+            const storageKey = `pantry_products_${uid}`;
             const savedProducts = localStorage.getItem(storageKey);
             if (savedProducts) {
                 setProducts(JSON.parse(savedProducts));
@@ -44,8 +47,11 @@ export default function PantryApp() {
 
     // Save products to localStorage whenever they change
     useEffect(() => {
-        if (currentUser && products.length > 0) {
-            const storageKey = `pantry_products_${currentUser.uid}`;
+        const isDeveloperMode = localStorage.getItem('developer_mode') === 'true';
+        const uid = isDeveloperMode ? localStorage.getItem('developer_user_uid') : currentUser?.uid;
+
+        if (uid && products.length > 0) {
+            const storageKey = `pantry_products_${uid}`;
             localStorage.setItem(storageKey, JSON.stringify(products));
         }
     }, [products, currentUser]);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -23,6 +23,20 @@ export default function Login() {
             setError(getErrorMessage(err.code));
         }
         setLoading(false);
+    }
+
+    async function handleDemoLogin() {
+        // Cerca l'utente andrea_greco2010@outlook.it
+        const users = JSON.parse(localStorage.getItem('pantry_users') || '[]');
+        const realUser = users.find(u => u.email === 'andrea_greco2010@outlook.it');
+
+        if (realUser) {
+            localStorage.setItem('developer_mode', 'true');
+            localStorage.setItem('developer_user_uid', realUser.uid);
+            navigate('/');
+        } else {
+            setError('Account demo non trovato. Assicurati di esserti registrato con andrea_greco2010@outlook.it');
+        }
     }
 
     function getErrorMessage(code) {
@@ -120,14 +134,27 @@ export default function Login() {
                             Opzioni Sviluppatore / Demo
                         </p>
                         <button
-                            onClick={() => navigate('/')}
-                            className="w-full py-3 px-6 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold rounded-xl border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-all flex items-center justify-center gap-2"
+                            type="button"
+                            disabled={loading}
+                            onClick={handleDemoLogin}
+                            className="w-full py-3 px-6 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold rounded-xl border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <Mail className="w-5 h-5" />
-                            Simula Click Link Email
+                            Developer - Accedi Direct
                         </button>
                     </div>
 
+                    <div className="mt-6 text-center">
+                        <p className="text-gray-600 dark:text-gray-400">
+                            Non hai un account?{' '}
+                            <Link
+                                to="/register"
+                                className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-semibold transition-colors"
+                            >
+                                Registrati
+                            </Link>
+                        </p>
+                    </div>
 
                 </div>
             </div>
