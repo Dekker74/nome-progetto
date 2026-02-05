@@ -26,17 +26,17 @@ export default function Login() {
     }
 
     async function handleDemoLogin() {
-        // Cerca l'utente andrea_greco2010@outlook.it
-        const users = JSON.parse(localStorage.getItem('pantry_users') || '[]');
-        const realUser = users.find(u => u.email === 'andrea_greco2010@outlook.it');
-
-        if (realUser) {
-            localStorage.setItem('developer_mode', 'true');
-            localStorage.setItem('developer_user_uid', realUser.uid);
+        try {
+            setError('');
+            setLoading(true);
+            const devEmail = 'andrea_greco2010@outlook.it';
+            const devPassword = 'Paperino12!';
+            await login(devEmail, devPassword);
             navigate('/');
-        } else {
-            setError('Account demo non trovato. Assicurati di esserti registrato con andrea_greco2010@outlook.it');
+        } catch (err) {
+            setError('Errore durante il login dev: ' + getErrorMessage(err.code));
         }
+        setLoading(false);
     }
 
     function getErrorMessage(code) {
