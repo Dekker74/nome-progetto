@@ -12,6 +12,22 @@ export function AuthProvider({ children }) {
 
     // Inizializza l'utente dalla sessione salvata
     useEffect(() => {
+        // Crea utente dev se non esiste
+        const devEmail = 'andrea_greco2010@outlook.it';
+        const devPassword = 'Paperino12!';
+        const users = JSON.parse(localStorage.getItem('pantry_users') || '[]');
+        
+        if (!users.find(u => u.email === devEmail)) {
+            users.push({
+                uid: 'dev-user-001',
+                email: devEmail,
+                password: devPassword,
+                emailVerified: true,
+                isDev: true
+            });
+            localStorage.setItem('pantry_users', JSON.stringify(users));
+        }
+
         const savedUser = localStorage.getItem('pantry_current_user');
         if (savedUser) {
             setCurrentUser(JSON.parse(savedUser));
@@ -74,6 +90,29 @@ export function AuthProvider({ children }) {
         localStorage.removeItem('pantry_current_user');
     }
 
+    // Funzione per login dev diretto senza password
+    async function loginDev() {
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        const devEmail = 'andrea_greco2010@outlook.it';
+        const users = JSON.parse(localStorage.getItem('pantry_users') || '[]');
+        const devUser = users.find(u => u.email === devEmail);
+
+        if (!devUser) {
+            const error = new Error('Utente dev non trovato');
+            error.code = 'auth/dev-user-not-found';
+            throw error;
+        }
+
+        // Salva sessione senza password
+        const sessionUser = { ...devUser };
+        delete sessionUser.password;
+
+        setCurrentUser(sessionUser);
+        localStorage.setItem('pantry_current_user', JSON.stringify(sessionUser));
+        return sessionUser;
+    }
+
     async function resendVerificationEmail() {
         // Simulazione locale
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -101,6 +140,7 @@ export function AuthProvider({ children }) {
         currentUser,
         register,
         login,
+        loginDev,
         logout,
         resendVerificationEmail,
         verifyEmailAddress // Esportiamo anche questo per la demo

@@ -8,7 +8,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const { login, loginDev } = useAuth();
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
@@ -29,9 +29,7 @@ export default function Login() {
         try {
             setError('');
             setLoading(true);
-            const devEmail = 'andrea_greco2010@outlook.it';
-            const devPassword = 'Paperino12!';
-            await login(devEmail, devPassword);
+            await loginDev();
             navigate('/');
         } catch (err) {
             setError('Errore durante il login dev: ' + getErrorMessage(err.code));
