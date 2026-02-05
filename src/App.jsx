@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Login from './components/auth/Login';
-import Register from './components/auth/Register';
 import EmailVerification from './components/auth/EmailVerification';
 import PantryApp from './components/PantryApp';
 import './index.css';
@@ -14,7 +13,6 @@ function App() {
             <AuthProvider>
                 <Routes>
                     <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
                     <Route path="/verify-email" element={<EmailVerification />} />
                     <Route
                         path="/"
