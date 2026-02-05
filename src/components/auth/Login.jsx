@@ -120,7 +120,7 @@ export default function Login() {
                             Opzioni Sviluppatore / Demo
                         </p>
                         <button
-                            onClick={() => navigate('/verify-email')}
+                            onClick={() => navigate('/')}
                             className="w-full py-3 px-6 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-semibold rounded-xl border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-all flex items-center justify-center gap-2"
                         >
                             <Mail className="w-5 h-5" />
