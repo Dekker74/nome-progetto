@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { X, Plus, Calendar, Tag, Camera, Image as LucideImage, Loader2, ScanBarcode, Search, Milk, Carrot, Apple, Drumstick, Wheat, Coffee, PackageOpen } from 'lucide-react';
+import { X, Plus, Tag, Camera, Loader2, ScanBarcode, Search, Milk, Carrot, Apple, Drumstick, Wheat, Coffee, PackageOpen } from 'lucide-react';
 import QRScanner from './QRScanner';
 import DatePicker from './DatePicker';
 
@@ -50,12 +50,6 @@ export default function AddProductModal({ isOpen, onClose, onAdd }) {
         ctx.font = 'bold 60px Inter, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-
-        // Wrap text
-        const words = text.split(' ');
-        let line = '';
-        let y = 250;
-        const lineHeight = 70;
 
         // Simple centering logic (simplified)
         ctx.fillText(text, 250, 250);

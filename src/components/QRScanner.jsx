@@ -5,7 +5,6 @@ import { AlertCircle } from 'lucide-react';
 export default function QRScanner({ onScan, onError }) {
     const [error, setError] = useState('');
     const [hasPermission, setHasPermission] = useState(null);
-    const scannerRef = useRef(null);
     const html5QrCodeRef = useRef(null);
 
     useEffect(() => {
@@ -67,7 +66,7 @@ export default function QRScanner({ onScan, onError }) {
                 }
             }
         };
-    }, []); // Empty dependency array -> run once on mount
+    }, [onScan, onError]); // Dependencies on onScan and onError
 
     return (
         <div className="w-full max-w-md mx-auto overflow-hidden rounded-xl border-2 border-dashed border-emerald-500/50 bg-black relative">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChefHat, Clock, Sparkles, ArrowRight, Bot, Loader2, RotateCcw } from 'lucide-react';
+import { ChefHat, Clock, Sparkles, ArrowRight, Bot, RotateCcw } from 'lucide-react';
 import RecipeModal from './RecipeModal';
 import { generateAiRecipes } from '../utils/aiService';
 

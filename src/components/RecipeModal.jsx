@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ChefHat, Clock, Users, CheckCircle, AlertCircle, ShoppingBag, Flame, PartyPopper, Loader2 } from 'lucide-react';
+import { X, ChefHat, Clock, Users, CheckCircle, ShoppingBag, Flame, PartyPopper, Loader2 } from 'lucide-react';
 
 export default function RecipeModal({ recipe, isOpen, onClose, onCook }) {
     const [isCooking, setIsCooking] = useState(false);

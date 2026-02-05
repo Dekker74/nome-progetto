@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail, RefreshCw, CheckCircle, AlertCircle, LogOut } from 'lucide-react';
+import { Mail, CheckCircle, AlertCircle, LogOut } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function EmailVerification() {
@@ -36,10 +36,6 @@ export default function EmailVerification() {
         // Non serve reload, il navigate nell'useEffect scatterà al cambio di stato
         // O forziamo per sicurezza:
         navigate('/');
-    }
-
-    async function handleRefresh() {
-        window.location.reload();
     }
 
     async function handleLogout() {

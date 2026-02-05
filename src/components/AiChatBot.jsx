@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, X, Bot, User, Loader2, MessageCircle } from 'lucide-react';
+import { Send, X, Bot, User, Loader2 } from 'lucide-react';
 import { getAiChatResponse, CHEF_PERSONALITIES } from '../utils/aiService';
 
 export default function AiChatBot({ products, isOpen, onToggle }) {
@@ -45,7 +45,7 @@ export default function AiChatBot({ products, isOpen, onToggle }) {
                 return () => clearTimeout(timer);
             }
         }
-    }, [isOpen]);
+    }, [isOpen, messages.length, currentPersonality.greeting, shouldRender]);
 
     // Change personality and reset chat if needed or just notify
     const handlePersonalityChange = (pid) => {
